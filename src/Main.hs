@@ -19,22 +19,21 @@ type Body = [Element]
 
 -- | The main entry point.
 main :: IO ()
-main = do
-    putStrLn $ displayElement $ generateHtml [] $ [Tag "div" [Attribute "class" "row"]
-                                                     [Tag "div" [Attribute "class" "col-xs-6"]
-                                                        [Tag "p" [Attribute "class" "header-text"]
-                                                        [Text "Welcome"]],
-                                                      Tag "div" [Attribute "class" "col-xs-6"]
-                                                        [Tag "img" [Attribute "class" "header-picture"] []]]]
+main = putStrLn $ displayElement $ generateHtml [] [Tag "div" [Attribute "class" "row"]
+                                                      [Tag "div" [Attribute "class" "col-xs-6"]
+                                                         [Tag "p" [Attribute "class" "header-text"]
+                                                         [Text "Welcome"]],
+                                                       Tag "div" [Attribute "class" "col-xs-6"]
+                                                         [Tag "img" [Attribute "class" "header-picture"] []]]]
 
 displayHtml :: Root -> String
 displayHtml = displayElement
 
 generateHtml :: Head -> Body -> Root
-generateHtml head body = SelfClosingTag "!DOCTYPE" []
-                        [Tag "html" []
-                           [Tag "head" [] head,
-                            Tag "body" [] body]]
+generateHtml header body = SelfClosingTag "!DOCTYPE" []
+                          [Tag "html" []
+                             [Tag "head" [] header,
+                              Tag "body" [] body]]
 
 displayElement :: Element -> String
 displayElement (Text x) = x
