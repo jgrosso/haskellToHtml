@@ -1,4 +1,8 @@
-module Main where
+module Html
+    (displayHtml,
+     generateHtml,
+     Element(..)
+    ) where
 
 type AttributeName = String
 type AttributeValue = String
@@ -6,7 +10,6 @@ data Attribute = Attribute AttributeName AttributeValue
 type Attributes = [Attribute]
 
 type TagName = String
-type SelfClosing = Bool
 data Element = Text String
              | Tag TagName Attributes Html
              | SelfClosingTag TagName Attributes Html
@@ -17,9 +20,8 @@ type Root = Element
 type Head = [Element]
 type Body = [Element]
 
--- | The main entry point.
-main :: IO ()
-main = putStrLn $ displayElement $ generateHtml [] [Tag "div" [Attribute "class" "row"]
+example :: IO ()
+example = putStrLn $ displayElement $ generateHtml [] [Tag "div" [Attribute "class" "row"]
                                                       [Tag "div" [Attribute "class" "col-xs-6"]
                                                          [Tag "p" [Attribute "class" "header-text"]
                                                          [Text "Welcome"]],
